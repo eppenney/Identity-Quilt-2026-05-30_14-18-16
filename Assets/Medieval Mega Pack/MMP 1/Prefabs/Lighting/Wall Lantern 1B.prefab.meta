@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6a92bfd77b7b0f44d9b8d9188b35553d
+timeCreated: 1546531442
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/Prefabs/Lighting/Wall Lantern 1B.prefab
+  uploadId: 316593

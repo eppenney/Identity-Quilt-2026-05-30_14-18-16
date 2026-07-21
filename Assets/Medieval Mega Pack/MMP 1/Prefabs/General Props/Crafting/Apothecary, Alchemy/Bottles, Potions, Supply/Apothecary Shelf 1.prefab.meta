@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 6fc664d4755edee468cdbbd3c26210d4
+timeCreated: 1537996876
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/Prefabs/General Props/Crafting/Apothecary,
+    Alchemy/Bottles, Potions, Supply/Apothecary Shelf 1.prefab
+  uploadId: 316593

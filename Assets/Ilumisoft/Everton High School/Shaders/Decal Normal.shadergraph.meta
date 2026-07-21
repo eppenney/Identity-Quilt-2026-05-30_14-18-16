@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a0606b66179d2384a858cac8626f180b
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322137
+  packageName: Everton High School - Modular Urban School Environment URP
+  packageVersion: 1.0
+  assetPath: Assets/Ilumisoft/Everton High School/Shaders/Decal Normal.shadergraph
+  uploadId: 760982

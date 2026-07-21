@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 2eec24be5abffeb4589d0da39007fbc5
+timeCreated: 1543504250
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/Prefabs/Environment Prefabs/Fencing,
+    Sidewalks/Sidewalk 1D.prefab
+  uploadId: 316593

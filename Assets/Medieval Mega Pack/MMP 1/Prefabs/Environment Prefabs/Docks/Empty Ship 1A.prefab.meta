@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 479eb4a0b8b05cd44b652409397a0d92
+timeCreated: 1547661372
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/Prefabs/Environment Prefabs/Docks/Empty
+    Ship 1A.prefab
+  uploadId: 316593

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 33c0380a31e1bb14d98d8a7962ed15de
+timeCreated: 1535824320
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/FBX/Materials/Particle, Materials/smoke_effect.mat
+  uploadId: 316593

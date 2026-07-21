@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 855a56ec36935074f83de5832cd2af55
+timeCreated: 1537475010
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/Prefabs/Castles/Quick Modules/Castle
+    Wall Module 1B.prefab
+  uploadId: 316593

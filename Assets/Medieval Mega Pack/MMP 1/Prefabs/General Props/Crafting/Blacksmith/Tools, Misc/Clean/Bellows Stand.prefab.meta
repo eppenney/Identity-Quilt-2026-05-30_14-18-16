@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a8401ac92dce3754cbbf1189f66f0af3
+timeCreated: 1537827384
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/Prefabs/General Props/Crafting/Blacksmith/Tools,
+    Misc/Clean/Bellows Stand.prefab
+  uploadId: 316593

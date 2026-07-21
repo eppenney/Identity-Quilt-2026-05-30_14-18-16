@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: dc3f62bb3820a914fbf016806230a970
+timeCreated: 1548012362
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/Prefabs/Lighting/Ceiling Lantern 1B.prefab
+  uploadId: 316593

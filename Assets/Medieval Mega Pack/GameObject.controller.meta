@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c33ad65ec888111498bccd5bcba07f2e
+timeCreated: 1536172456
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/GameObject.controller
+  uploadId: 316593

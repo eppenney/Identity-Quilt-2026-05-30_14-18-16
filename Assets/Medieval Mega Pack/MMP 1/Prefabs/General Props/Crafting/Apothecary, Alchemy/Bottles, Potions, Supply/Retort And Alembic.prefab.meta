@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: d8416154847bfda43a0da2a167c93513
+timeCreated: 1537982796
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/Prefabs/General Props/Crafting/Apothecary,
+    Alchemy/Bottles, Potions, Supply/Retort And Alembic.prefab
+  uploadId: 316593

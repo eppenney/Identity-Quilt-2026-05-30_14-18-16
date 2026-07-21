@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: ca118b77abbb64748aa178af59bfae0c
+timeCreated: 1547734087
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/Prefabs/Environment Prefabs/Fencing,
+    Sidewalks/Tall Wood Fence 2A2.prefab
+  uploadId: 316593

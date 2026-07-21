@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 1b7541d6c757fec419c2811f1b4f09f9
+timeCreated: 1547560371
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/Prefabs/General Props/Training Dummies,
+    Targets/Practice Dummy 1B.prefab
+  uploadId: 316593

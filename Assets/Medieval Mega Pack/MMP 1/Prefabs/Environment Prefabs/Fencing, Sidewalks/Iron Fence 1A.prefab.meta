@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 43ccf1df07ddb4a44a2920ad1f2e617b
+timeCreated: 1538681971
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/MMP 1/Prefabs/Environment Prefabs/Fencing,
+    Sidewalks/Iron Fence 1A.prefab
+  uploadId: 316593
