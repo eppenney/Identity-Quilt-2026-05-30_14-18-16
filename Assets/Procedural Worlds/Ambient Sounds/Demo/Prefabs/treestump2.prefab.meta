@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 316332c7e5f473f4993412854c3a8e7e
+timeCreated: 1552053416
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142132
+  packageName: Ambient Sounds - Interactive Soundscapes for Unity 6
+  packageVersion: 1.2.18
+  assetPath: Assets/Procedural Worlds/Ambient Sounds/Demo/Prefabs/treestump2.prefab
+  uploadId: 772684

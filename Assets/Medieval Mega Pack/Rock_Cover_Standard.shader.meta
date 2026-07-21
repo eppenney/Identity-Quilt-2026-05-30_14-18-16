@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5be2c68bdb250cf40bedec05c0d03a6f
+timeCreated: 1541008588
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130174
+  packageName: Medieval Mega Pack
+  packageVersion: 1.5
+  assetPath: Assets/Medieval Mega Pack/Rock_Cover_Standard.shader
+  uploadId: 316593

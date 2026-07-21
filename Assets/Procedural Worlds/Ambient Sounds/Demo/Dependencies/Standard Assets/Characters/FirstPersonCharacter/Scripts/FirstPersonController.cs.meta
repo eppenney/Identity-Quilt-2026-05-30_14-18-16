@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 05ec5cf00ca181d45a42ba1870e148c3
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142132
+  packageName: Ambient Sounds - Interactive Soundscapes for Unity 6
+  packageVersion: 1.2.18
+  assetPath: Assets/Procedural Worlds/Ambient Sounds/Demo/Dependencies/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs
+  uploadId: 772684

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f23bf5577575e1e4ab3a68243bcd3dce
+timeCreated: 1540349716
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142132
+  packageName: Ambient Sounds - Interactive Soundscapes for Unity 6
+  packageVersion: 1.2.18
+  assetPath: Assets/Procedural Worlds/Ambient Sounds/Localization/English/ModifierEditor.English.pwlpk
+  uploadId: 772684

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 07b337d0ac7b1184ea042d1bbe9c27d2
+timeCreated: 1552227631
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142132
+  packageName: Ambient Sounds - Interactive Soundscapes for Unity 6
+  packageVersion: 1.2.18
+  assetPath: Assets/Procedural Worlds/Ambient Sounds/Audio/Sequences/Ambient Loop
+    Rain.asset
+  uploadId: 772684

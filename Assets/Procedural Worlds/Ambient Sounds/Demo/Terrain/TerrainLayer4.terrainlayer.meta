@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 61d482f48ea0cde418be60c90f0f03be
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142132
+  packageName: Ambient Sounds - Interactive Soundscapes for Unity 6
+  packageVersion: 1.2.18
+  assetPath: Assets/Procedural Worlds/Ambient Sounds/Demo/Terrain/TerrainLayer4.terrainlayer
+  uploadId: 772684

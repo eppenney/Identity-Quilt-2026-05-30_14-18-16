@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3f15d019d7b12cd4099bf78e0b6fa82b
+timeCreated: 1552062304
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142132
+  packageName: Ambient Sounds - Interactive Soundscapes for Unity 6
+  packageVersion: 1.2.18
+  assetPath: Assets/Procedural Worlds/Ambient Sounds/Demo/Prefabs/SignButton.prefab
+  uploadId: 772684

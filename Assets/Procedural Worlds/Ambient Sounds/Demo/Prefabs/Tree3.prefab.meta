@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1781122612750ce4480f07993d50d116
+timeCreated: 1552051618
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142132
+  packageName: Ambient Sounds - Interactive Soundscapes for Unity 6
+  packageVersion: 1.2.18
+  assetPath: Assets/Procedural Worlds/Ambient Sounds/Demo/Prefabs/Tree3.prefab
+  uploadId: 772684

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c1bbfafbde15c854681023b9e01e12dd
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142132
+  packageName: Ambient Sounds - Interactive Soundscapes for Unity 6
+  packageVersion: 1.2.18
+  assetPath: Assets/Procedural Worlds/Ambient Sounds/Demo/Dependencies/Standard Assets/Utility/LerpControlledBob.cs
+  uploadId: 772684

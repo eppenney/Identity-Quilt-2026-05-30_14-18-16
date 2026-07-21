@@ -1,0 +1,287 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+
+using UnityEngine;
+using UnityEditor;
+using UnityEditorInternal;
+
+using Broccoli.Base;
+using Broccoli.Pipe;
+using Broccoli.Model;
+using Broccoli.Utils;
+
+namespace Broccoli.TreeNodeEditor
+{
+	/// <summary>
+	/// Baker element editor.
+	/// </summary>
+	[CustomEditor(typeof(BakerElement))]
+	public class BakerElementEditor : PipelineElementEditor {
+		#region Vars
+		/// <summary>
+		/// The positioner element.
+		/// </summary>
+		public BakerElement bakerElement;
+		/// <summary>
+		/// Options to show on the toolbar.
+		/// </summary>
+		static GUIContent[] toolbarOptions = new GUIContent[] {
+			new GUIContent ("Prefab", "Edit Prefab setting, like mesh baking and Level of Detail (LOD) Group settings."), 
+			new GUIContent ("Collider", "Options to create colliders based on the tree geometry."), 
+			new GUIContent ("AO", "Options to bake Ambient Occlusion in the tree geometry.")};
+		static int OPTION_PREFAB = 0;
+		static int OPTION_COLLIDER = 1;
+		static int OPTION_AO = 2;
+        int selectedToolbarOption = 0;
+		SerializedProperty propEnableAO;
+		SerializedProperty propSamplesAO;
+		SerializedProperty propStrengthAO;
+		SerializedProperty propEnableHierarchyAO;
+		SerializedProperty propHierarchyAOStrength;
+		SerializedProperty propHierarchyAOCurve;
+		SerializedProperty propEnableAOInPreview;
+		SerializedProperty propEnableAOAtRuntime;
+		SerializedProperty propLodFade;
+		SerializedProperty propLodFadeAnimate;
+		SerializedProperty propLodTransitionWidth;
+		SerializedProperty propBillboardIncludeController;
+		SerializedProperty propBillboardSproutTint;
+		SerializedProperty propUnwrapUV1sAtRuntime;
+		SerializedProperty propUnwrapUV1sAtPrefab;
+		SerializedProperty propSplitSubmeshes;
+		SerializedProperty propKeepUV5Data;
+		SerializedProperty propAddCollider;
+		SerializedProperty propColliderScale;
+		SerializedProperty propColliderOriginToAvg;
+		private static GUIContent enableAOGUIContent = new GUIContent("Enable AO", "Enables calculating and applying ambient occlusion to the tree mesh.");
+		private static GUIContent samplesAOGUIContent = new GUIContent ("AO Samples", "Number of rays projected from each vertex to calculate its occlusion value.");
+		private static GUIContent strengthAOGUIContent = new GUIContent ("AO Strength", "How much the AO should be applied to each vertex.");
+		private static GUIContent enableHierarchyAOGUIContent = new GUIContent ("Enable Hierarchy AO", "Enabled additional ambient occlusion on the tree branches mesh based on the vertex position on the tree hierarchy (darkens from the tip of the terminal branches).");
+		private static GUIContent hierarchyAOStrengthGUIContent = new GUIContent ("H AO Strength", "How much the AO should be applied to each vertex based on their position on the tree hierarchy.");
+		private static GUIContent hierarchyAOCurveGUIContent = new GUIContent ("H AO Curve", "Curve to modify the final hierarchy AO per vertex based on its position on the tree hierarchy.");
+		private static GUIContent enableAOInPreviewGUIContent = new GUIContent ("EnableAOInPreview", "Enables AO on the preview tree (in the Editor).");
+		private static GUIContent enableAOAtRuntimeGUIContent = new GUIContent ("EnableAOAtRuntime", "Enables AO when generating trees at runtime (depending on the samples, AO calculation can slow down the global generation process).");
+		private static GUIContent lodFadingGUIContent = new GUIContent ("LOD Fading Mode");
+		private static GUIContent lodFadingAnimateGUIContent = new GUIContent ("LOD Fading Animation");
+		private static GUIContent billboardIncludeControllerGUIContent = new GUIContent ("Include Controller", "Includes a BroccoliTreeController component on the final billboard asset, enabling the wind effect on it.");
+		private static GUIContent billboardSproutTintGUIContent = new GUIContent ("Additional Sprout Tint", "Applies an additional tint to the sprouts when rendering the Albedo Texture for the Billboard asset.");
+		private static GUIContent unwrapUV1sAtRuntimeGUIContent = new GUIContent ("Uwrap UV1 at Runtime", "Unwraps the mesh creating a unique UV set on the UV1 (ch. 1) mapping at runtime.");
+		private static GUIContent unwrapUV1sAtPrefabGUIContent = new GUIContent ("Uwrap Prefab UV1", "Unwraps the mesh creating a unique UV set on the UV1 (ch. 1) mapping on the Prefab export process.");
+		private static GUIContent splitSubmeshesGUIContent = new GUIContent ("Split Submeshes", "Creates individual GameObjects for each submesh.");
+		private static GUIContent keepUV5DataGUIContent = new GUIContent ("Keep UV5 Data", "Keeps the UV5 cnannel to acces branch id, structure id and check if a vertex either belongs to a branch or a sprout.");
+		#endregion
+
+		#region GUI Content and Labels
+		private static string labelLODPanelTitle = "LOD Group Settings";
+		private static string labelBillboardPanelTitle = "Billboard Processing Settings";
+		private static string labelMeshPanelTitle = "Mesh Processing Settings";
+		private static string labelColliderPanelTitle = "Collider Settings";
+		private static string labelAOPanelTitle = "Ambient Occlusion Settings";
+		#endregion
+
+		#region Messages
+		private static string MSG_ENABLE_AO = "Enables ambient occlusion baked on the final prefab mesh.";
+		private static string MSG_SAMPLES_AO = "Enables this position to be a possible point of origin for a tree.";
+		private static string MSG_STRENGTH_AO = "Amount of ambient occlusion to bake into the mesh.";
+		private static string MSG_ENABLE_HIERARCHY_AO = "Enabled additional ambient occlusion on the tree branches mesh based on the vertex position on the tree hierarchy (darkens from the tip of the terminal branches).";
+		private static string MSG_HIERARCHY_AO_STRENGTH = "How much the AO should be applied to each vertex based on their position on the tree hierarchy.";
+		private static string MSG_HIERARCHY_AO_CURVE = "Curve to modify the final hierarchy AO per vertex based on its position on the tree hierarchy.";
+		private static string MSG_ENABLE_AO_IN_PREVIEW = "Enable ambient occlusion when previewing the tree in the editor.";
+		private static string MSG_ENABLE_AO_AT_RUNTIME = "Enable ambient occlusion when creating trees at runtime. Baking ambient occlusion to the mesh at runtime is processing intensive.";
+		private static string MSG_LOD_FADE = "LOD transition mode on the final prefab.";
+		private static string MSG_LOD_FADE_ANIMATE = "LOD transition mode animation enabled or disabled.";
+		private static string MSG_LOD_TRANSITION_WIDTH = "Transition value to cross-fade between elements within the LOD group.";
+		private static string MSG_UNWRAP_UV1S = "Unwraps the mesh creating a unique UV set on the UV1 (ch. 1) mapping.";
+		private static string MSG_UNWRAP_UV1S_PREFAB_HINT = "Unwrapping the final mesh on the Prefab creates additional geometry due to the necessary seams used to flatten the mesh on the UV plane. The vertex count will increase, while the tris count will remain the same.";
+		private static string MSG_SPLIT_SUBMESHES = "Creates individual GameObjects for each submesh.";
+		private static string MSG_KEEP_UV5_DATA = "Keeps the UV5 cnannel to acces branch id, structure id and check if a vertex either belongs to a branch or a sprout.";
+		private static string MSG_ADD_COLLIDER = "Enables creating a collider for this pipeline.";
+		private static string MSG_COLLIDER_SCALE = "Scale for the capsule collider from the girth at the base of the trunk.";
+		private static string MSG_COLLIDER_ORIGIN_TO_AVG = "A value of 0 places the collider at the base of the trunk, a value of 1 places it averaging the origin and final position of the trunk.";
+		#endregion
+
+		#region Events
+		/// <summary>
+		/// Actions to perform on the concrete class when the enable event is raised.
+		/// </summary>
+		protected override void OnEnableSpecific()
+		{
+			bakerElement = target as BakerElement;
+
+			propEnableAO = GetSerializedProperty("enableAO");
+			propSamplesAO = GetSerializedProperty("samplesAO");
+			propStrengthAO = GetSerializedProperty("strengthAO");
+			propEnableHierarchyAO = GetSerializedProperty("enableHierarchyAO");
+			propHierarchyAOStrength = GetSerializedProperty("hierarchyAOStrength");
+			propHierarchyAOCurve = GetSerializedProperty("hierarchyAOCurve");
+			propEnableAOInPreview = GetSerializedProperty("enableAOInPreview");
+			propEnableAOAtRuntime = GetSerializedProperty("enableAOAtRuntime");
+			propLodFade = GetSerializedProperty("lodFade");
+			propLodFadeAnimate = GetSerializedProperty("lodFadeAnimate");
+			propLodTransitionWidth = GetSerializedProperty("lodTransitionWidth");
+			propBillboardIncludeController = GetSerializedProperty("billboardIncludeController");
+			propBillboardSproutTint = GetSerializedProperty("billboardSproutTint");
+			propUnwrapUV1sAtRuntime = GetSerializedProperty("unwrapUV1sAtRuntime");
+			propUnwrapUV1sAtPrefab = GetSerializedProperty("unwrapUV1sAtPrefab");
+			propSplitSubmeshes = GetSerializedProperty("splitSubmeshes");
+			propKeepUV5Data = GetSerializedProperty("keepUV5Data");
+			propAddCollider = GetSerializedProperty("addCollider");
+			propColliderScale = GetSerializedProperty("colliderScale");
+			propColliderOriginToAvg = GetSerializedProperty("colliderOriginToAvg");
+		}
+		/// <summary>
+		/// Raises the inspector GUI event.
+		/// </summary>
+		protected override void OnInspectorGUISpecific () {
+			UpdateSerialized ();
+
+			// Log box.
+			DrawLogBox ();
+
+			selectedToolbarOption = GUILayout.Toolbar (selectedToolbarOption, toolbarOptions);
+			EditorGUILayout.Space ();
+
+			if (selectedToolbarOption == OPTION_PREFAB) {
+				EditorGUILayout.LabelField (labelLODPanelTitle, EditorStyles.boldLabel);
+				EditorGUI.BeginChangeCheck ();
+				EditorGUILayout.PropertyField (propLodFade, lodFadingGUIContent);
+				ShowHelpBox (MSG_LOD_FADE);
+				EditorGUILayout.PropertyField (propLodFadeAnimate, lodFadingAnimateGUIContent);
+				ShowHelpBox (MSG_LOD_FADE_ANIMATE);
+				EditorGUILayout.Slider (propLodTransitionWidth, 0f, 1f, "Transition Width");
+				ShowHelpBox (MSG_LOD_TRANSITION_WIDTH);
+				EditorGUILayout.Space ();
+				EditorGUILayout.LabelField (labelBillboardPanelTitle, EditorStyles.boldLabel);
+				EditorGUILayout.PropertyField (propBillboardIncludeController, billboardIncludeControllerGUIContent);
+				EditorGUILayout.PropertyField (propBillboardSproutTint, billboardSproutTintGUIContent);
+				EditorGUILayout.Space ();
+				EditorGUILayout.LabelField (labelMeshPanelTitle, EditorStyles.boldLabel);
+				EditorGUILayout.PropertyField (propUnwrapUV1sAtRuntime, unwrapUV1sAtRuntimeGUIContent);
+				EditorGUILayout.PropertyField (propUnwrapUV1sAtPrefab, unwrapUV1sAtPrefabGUIContent);
+				ShowHelpBox (MSG_UNWRAP_UV1S);
+				if (propUnwrapUV1sAtPrefab.boolValue) {
+					EditorGUILayout.HelpBox (MSG_UNWRAP_UV1S_PREFAB_HINT, MessageType.Info);
+				}
+				EditorGUILayout.PropertyField (propSplitSubmeshes, splitSubmeshesGUIContent);
+				ShowHelpBox (MSG_SPLIT_SUBMESHES);
+				EditorGUILayout.PropertyField (propKeepUV5Data, keepUV5DataGUIContent);
+				ShowHelpBox (MSG_KEEP_UV5_DATA);
+				if (EditorGUI.EndChangeCheck ()) {
+					ApplySerialized ();
+					bakerElement.Validate ();
+				}
+			} else if (selectedToolbarOption == OPTION_COLLIDER) {
+				EditorGUILayout.LabelField (labelColliderPanelTitle, EditorStyles.boldLabel);
+				EditorGUI.BeginChangeCheck ();
+				// Enables colliders on this pipeline.
+				EditorGUILayout.PropertyField (propAddCollider);
+				ShowHelpBox (MSG_ADD_COLLIDER);
+				if (propAddCollider.boolValue)
+				{
+					// Type of collider.
+					/*
+					EditorGUILayout.PropertyField (propColliderType);
+					ShowHelpBox (MSG_COLLIDER_TYPE);
+					if (propColliderType.enumValueIndex == (int)BakerElement.ColliderType.Capsule) {
+						*/
+					EditorGUILayout.Slider(propColliderScale, 0.5f, 3f);
+					ShowHelpBox(MSG_COLLIDER_SCALE);
+					EditorGUILayout.Slider (propColliderOriginToAvg, 0f, 1f);
+					ShowHelpBox (MSG_COLLIDER_ORIGIN_TO_AVG);
+					/*
+					} else {
+						EditorGUILayout.Slider (propColliderMeshResolution, 0.01f, 1f);
+						ShowHelpBox (MSG_COLLIDER_MESH_RESOLUTION);
+						IntRangePropertyField (propColliderMinLevel, propColliderMaxLevel, -3, 3, "Structure Levels");
+						ShowHelpBox (MSG_COLLIDER_MIN_MAX_LEVEL);
+					}
+					*/
+				}
+				if (EditorGUI.EndChangeCheck ()) {
+					UpdatePipeline (GlobalSettings.processingDelayLow);
+					ApplySerialized ();
+					bakerElement.Validate ();
+				}
+			} else if (selectedToolbarOption == OPTION_AO) {
+				EditorGUILayout.LabelField (labelAOPanelTitle, EditorStyles.boldLabel);
+				EditorGUI.BeginChangeCheck ();
+				// Enables AO baking on the final prefab mesh.
+				EditorGUILayout.PropertyField (propEnableAO, enableAOGUIContent);
+				ShowHelpBox (MSG_ENABLE_AO);
+				if (propEnableAO.boolValue) {
+					EditorGUI.indentLevel++;
+					// AO Samples.
+					EditorGUILayout.IntSlider (propSamplesAO, 1, 8, samplesAOGUIContent);
+					ShowHelpBox (MSG_SAMPLES_AO);
+					// AO Strength.
+					EditorGUILayout.Slider (propStrengthAO, 0f, 1f, strengthAOGUIContent);
+					ShowHelpBox (MSG_STRENGTH_AO);
+					EditorGUI.indentLevel--;
+				}
+				// Enables hierarchy AO baking on the final prefab mesh.
+				EditorGUILayout.PropertyField (propEnableHierarchyAO, enableHierarchyAOGUIContent);
+				ShowHelpBox (MSG_ENABLE_HIERARCHY_AO);
+				if (propEnableHierarchyAO.boolValue) {
+					EditorGUI.indentLevel++;
+					// Hierarchy AO Strength.
+					EditorGUILayout.Slider (propHierarchyAOStrength, 0f, 1f, hierarchyAOStrengthGUIContent);
+					ShowHelpBox (MSG_HIERARCHY_AO_STRENGTH);
+					// Hierarchy AO Curve.
+					EditorGUILayout.PropertyField (propHierarchyAOCurve, hierarchyAOCurveGUIContent);
+					ShowHelpBox (MSG_HIERARCHY_AO_CURVE);
+					EditorGUI.indentLevel--;
+				}
+				if (propEnableAO.boolValue || propEnableHierarchyAO.boolValue) {
+					EditorGUILayout.Space ();
+					// Enables AO in the preview tree of the editor.
+					EditorGUILayout.PropertyField (propEnableAOInPreview, enableAOInPreviewGUIContent);
+					ShowHelpBox (MSG_ENABLE_AO_IN_PREVIEW);
+					// Enables AO at runtime.
+					EditorGUILayout.PropertyField (propEnableAOAtRuntime, enableAOAtRuntimeGUIContent);
+					ShowHelpBox (MSG_ENABLE_AO_AT_RUNTIME);
+				}
+				if (EditorGUI.EndChangeCheck ()) {
+					UpdatePipeline (GlobalSettings.processingDelayLow);
+					ApplySerialized ();
+					bakerElement.Validate ();
+				}
+			}
+			EditorGUILayout.Space ();
+
+			DrawFieldHelpOptions ();
+		}
+		/// <summary>
+		/// Raises the scene GUI event.
+		/// </summary>
+		/// <param name="sceneView">Scene view.</param>
+		protected override void OnSceneGUI (SceneView sceneView) {
+			if (bakerElement.addCollider)
+			{
+				BroccoTree tree = TreeFactoryEditorWindow.editorWindow.treeFactory.previewTree;
+				if (tree == null) return;
+				float scale = TreeFactoryEditorWindow.editorWindow.treeFactory.treeFactoryPreferences.factoryScale;
+				List<BroccoTree.Branch> rootBranches = tree.branches;
+				Vector3 trunkBase;
+				Vector3 trunkTip;
+				for (int i = 0; i < rootBranches.Count; i++)
+				{
+					trunkBase = rootBranches[i].GetPointAtPosition(0f);
+					trunkTip = rootBranches[i].GetPointAtPosition(1f);
+					Vector3 treePos = TreeFactoryEditorWindow.editorWindow.treeFactory.GetPreviewTreeWorldOffset();
+					float colliderHeight = Vector3.Distance(trunkTip, trunkBase) * scale;
+					Vector3 colliderBase = treePos + trunkBase * scale;
+					colliderBase.y += colliderHeight / 2f;
+					Vector3 colliderAvg = treePos + (trunkTip + trunkBase) / 2f * scale;
+					EditorDrawUtils.DrawWireCapsule(
+						Vector3.Lerp(colliderBase, colliderAvg, bakerElement.colliderOriginToAvg),
+						Quaternion.identity,
+						rootBranches[i].maxGirth * scale * bakerElement.colliderScale,
+						colliderHeight,
+						Color.yellow);
+				}
+				sceneView.Repaint();
+			}
+		}
+		#endregion
+	}
+}
